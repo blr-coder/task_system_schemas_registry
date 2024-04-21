@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package task_svc;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "/task_svc";
+
+enum EventType {
+  CREATED = 0;
+  UPDATED = 1;
+  DELETED = 3;
+}
+
+enum TopicType {
+  CUD = 0;
+  LIFECYCLE = 1;
+}
+
+message BaseEvent {
+  int64 id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  TopicType topic_type = 3;
+  EventType event_type = 4;
+  TaskV1 data = 5;
+}
+
+message TaskV1 {
+  int64 id = 1;
+  string title = 2;
+  string description = 3;
+  string customer_id = 4;
+  string executor_id = 5;
+  TaskStatus status = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+enum TaskStatus {
+  PENDING = 0;
+  PROCESSING = 1;
+  DONE = 2;
+}
