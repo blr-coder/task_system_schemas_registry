@@ -36,6 +36,9 @@ message TaskV1 {
   TaskStatus status = 6;
   google.protobuf.Timestamp created_at = 7;
   google.protobuf.Timestamp updated_at = 8;
+  string currency = 9;
+  double amount = 10;
+  bool is_active = 11;
 }
 
 enum TaskStatus {
